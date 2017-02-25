@@ -9,9 +9,9 @@
 *.pch
 
 # Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+#*.so
+#*.dylib
+#*.dll
 
 # Fortran module files
 *.mod
@@ -27,3 +27,12 @@
 *.exe
 *.out
 *.app
+
+# Qt Creator files
+*.pro.user
+
+# Build files
+Makefile
+moc_*
+ui_*
+bin/
