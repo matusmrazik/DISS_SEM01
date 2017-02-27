@@ -6,6 +6,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = SEM01
 TEMPLATE = app
+CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -14,6 +15,8 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
+	DEFINES += DEBUG
+	DEFINES += LOG_FILE_NAME=\\\"$$TARGET\\\"
 	DESTDIR = ../debug/bin/
 	OBJECTS_DIR = ../debug/.obj/
 	LIBS += -L../debug/lib/
@@ -29,10 +32,12 @@ INCLUDEPATH += ../include/
 
 SOURCES += \
 	main.cpp\
-	MainWindow.cpp
+	MainWindow.cpp \
+    log/log.cpp
 
 HEADERS += \
-	MainWindow.hpp
+	MainWindow.hpp \
+    log/log.hpp
 
 FORMS += \
 	MainWindow.ui
