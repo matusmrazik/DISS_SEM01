@@ -33,11 +33,15 @@ INCLUDEPATH += ../include/
 SOURCES += \
 	main.cpp\
 	MainWindow.cpp \
-    log/log.cpp
+    log/log.cpp \
+    sim/sim_core_base.cpp \
+    sim/sim_core_monte_carlo.cpp
 
 HEADERS += \
 	MainWindow.hpp \
-    log/log.hpp
+    log/log.hpp \
+    sim/sim_core_base.hpp \
+    sim/sim_core_monte_carlo.hpp
 
 FORMS += \
 	MainWindow.ui
