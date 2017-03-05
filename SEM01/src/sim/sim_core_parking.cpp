@@ -1,4 +1,4 @@
-#include "sim_core_monte_carlo.hpp"
+#include "sim_core_parking.hpp"
 
 #include "log/log.hpp"
 
@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <cstdio>
 
-sim_core_monte_carlo::sim_core_monte_carlo()
+sim_core_parking::sim_core_parking()
 	: _places(15), _seed(0), _gen_seed(), _gen_k(), _gen_parking(),
 	  _dist_k(1, _places), _dist_parking(0.0, 1.0),
 	  _strategy_1_total(0), _strategy_2_total(0), _strategy_3_total(0),
@@ -14,11 +14,11 @@ sim_core_monte_carlo::sim_core_monte_carlo()
 {
 }
 
-sim_core_monte_carlo::~sim_core_monte_carlo()
+sim_core_parking::~sim_core_parking()
 {
 }
 
-void sim_core_monte_carlo::init(uint32_t parking_places, seed_t seed)
+void sim_core_parking::init(uint32_t parking_places, seed_t seed)
 {
 	_seed = seed;
 	LOG_INFO("Seed = %u", _seed);
@@ -30,17 +30,17 @@ void sim_core_monte_carlo::init(uint32_t parking_places, seed_t seed)
 	_dist_parking = std::uniform_real_distribution<>(0.0, 1.0);
 }
 
-void sim_core_monte_carlo::send_signal_at_replication(uint32_t replication)
+void sim_core_parking::send_signal_at_replication(uint32_t replication)
 {
 	_send_signal_at = replication;
 }
 
-sim_core_monte_carlo::seed_t sim_core_monte_carlo::get_seed() const
+sim_core_parking::seed_t sim_core_parking::get_seed() const
 {
 	return _seed;
 }
 
-void sim_core_monte_carlo::exec_replication(uint32_t)
+void sim_core_parking::exec_replication(uint32_t)
 {
 	uint32_t k = _dist_k(_gen_k);
 	std::vector<bool> free_places(_places, true);
@@ -124,9 +124,9 @@ void sim_core_monte_carlo::exec_replication(uint32_t)
 		++_strategy_3_data[free_pos];
 }
 
-void sim_core_monte_carlo::after_replication(uint32_t replication)
+void sim_core_parking::after_replication(uint32_t replication)
 {
-	sim_core_base::after_replication(replication);
+	sim_core_mc_base::after_replication(replication);
 	double result1 = (double)_strategy_1_total / replication;
 	double result2 = (double)_strategy_2_total / replication;
 	double result3 = (double)_strategy_3_total / replication;
@@ -136,9 +136,9 @@ void sim_core_monte_carlo::after_replication(uint32_t replication)
 	}
 }
 
-void sim_core_monte_carlo::before_simulation()
+void sim_core_parking::before_simulation()
 {
-	sim_core_base::before_simulation();
+	sim_core_mc_base::before_simulation();
 	_strategy_1_total = 0;
 	_strategy_2_total = 0;
 	_strategy_3_total = 0;
@@ -147,9 +147,9 @@ void sim_core_monte_carlo::before_simulation()
 	_strategy_3_data = QVector<double>(_places + 2, 0);
 }
 
-void sim_core_monte_carlo::after_simulation()
+void sim_core_parking::after_simulation()
 {
-	sim_core_base::after_simulation();
+	sim_core_mc_base::after_simulation();
 	LOG_INFO("N = %u", _places);
 	LOG_INFO("replications = %u", _repl);
 	LOG_INFO("Result:");
@@ -159,23 +159,23 @@ void sim_core_monte_carlo::after_simulation()
 	emit simulation_finished();
 }
 
-void sim_core_monte_carlo::stopped_action()
+void sim_core_parking::stopped_action()
 {
-	sim_core_base::stopped_action();
+	sim_core_mc_base::stopped_action();
 	emit simulation_finished();
 }
 
-QVector<double> sim_core_monte_carlo::get_strategy_1_data() const
+QVector<double> sim_core_parking::get_strategy_1_data() const
 {
 	return _strategy_1_data;
 }
 
-QVector<double> sim_core_monte_carlo::get_strategy_2_data() const
+QVector<double> sim_core_parking::get_strategy_2_data() const
 {
 	return _strategy_2_data;
 }
 
-QVector<double> sim_core_monte_carlo::get_strategy_3_data() const
+QVector<double> sim_core_parking::get_strategy_3_data() const
 {
 	return _strategy_3_data;
 }

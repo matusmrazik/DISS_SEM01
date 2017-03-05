@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	_ui(new Ui::MainWindow),
 	_str1_histo(nullptr), _str2_histo(nullptr), _str3_histo(nullptr),
-	_sim(new sim_core_monte_carlo), _skip_replications(0)
+	_sim(new sim_core_parking), _skip_replications(0)
 {
 	_ui->setupUi(this);
 	_ui->spinBoxCustomSeed->setMaximum(std::numeric_limits<int>::max());
@@ -62,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-	if (_sim->get_state() == sim_core_monte_carlo::state::RUNNING || _thr.joinable())
+	if (_sim->get_state() == sim_core_parking::state::RUNNING || _thr.joinable())
 	{
 		_sim->stop();
 		_thr.join();
@@ -109,7 +109,7 @@ void MainWindow::simulation_finished()
 	PLOT_HISTO(_ui->histo2, _str2_histo, ticks.size(), MAX(data2), ticks, labels, data2);
 	PLOT_HISTO(_ui->histo3, _str3_histo, ticks.size(), MAX(data3), ticks, labels, data3);
 
-	if (_sim->get_state() == sim_core_monte_carlo::state::STOPPED)
+	if (_sim->get_state() == sim_core_parking::state::STOPPED)
 	{
 		_ui->statusBar->showMessage("Simulácia zastavená", 5000);
 	}
@@ -142,7 +142,7 @@ void MainWindow::on_pushButtonStartSimulation_clicked()
 		_sim->init(parking_places);
 	}
 	_ui->labelUsedSeedValue->setText(QString::number(_sim->get_seed()));
-	_thr = std::thread(&sim_core_monte_carlo::simulate, _sim, replications);
+	_thr = std::thread(&sim_core_parking::simulate, _sim, replications);
 }
 
 void MainWindow::on_pushButtonStopSimulation_clicked()

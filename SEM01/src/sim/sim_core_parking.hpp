@@ -1,12 +1,12 @@
-#ifndef SIM_CORE_MONTE_CARLO_HPP
-#define SIM_CORE_MONTE_CARLO_HPP
+#ifndef SIM_CORE_PARKING_HPP
+#define SIM_CORE_PARKING_HPP
 
-#include "sim_core_base.hpp"
+#include "sim_core_mc_base.hpp"
 #include <random>
 #include <QObject>
 #include <QVector>
 
-class sim_core_monte_carlo : public QObject, public sim_core_base
+class sim_core_parking : public QObject, public sim_core_mc_base
 {
 	Q_OBJECT
 
@@ -15,8 +15,8 @@ public:
 	using seed_t = generator_t::result_type;
 
 public:
-	sim_core_monte_carlo();
-	virtual ~sim_core_monte_carlo();
+	sim_core_parking();
+	virtual ~sim_core_parking();
 
 	void init(uint32_t parking_places, seed_t seed = std::random_device{}());
 	void send_signal_at_replication(uint32_t replication);
@@ -52,4 +52,4 @@ private:
 	uint32_t _send_signal_at;
 };
 
-#endif // SIM_CORE_MONTE_CARLO_HPP
+#endif // SIM_CORE_PARKING_HPP

@@ -36,14 +36,14 @@ SOURCES += \
 	main.cpp\
 	MainWindow.cpp \
 	log/log.cpp \
-	sim/sim_core_base.cpp \
-	sim/sim_core_monte_carlo.cpp
+    sim/sim_core_mc_base.cpp \
+    sim/sim_core_parking.cpp
 
 HEADERS += \
 	MainWindow.hpp \
 	log/log.hpp \
-	sim/sim_core_base.hpp \
-	sim/sim_core_monte_carlo.hpp
+    sim/sim_core_mc_base.hpp \
+    sim/sim_core_parking.hpp
 
 FORMS += \
 	MainWindow.ui

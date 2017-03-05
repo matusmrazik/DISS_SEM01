@@ -5,7 +5,7 @@
 #include <thread>
 #include <qcustomplot.h>
 
-#include "sim/sim_core_monte_carlo.hpp"
+#include "sim/sim_core_parking.hpp"
 
 namespace Ui {
 	class MainWindow;
@@ -34,7 +34,7 @@ private:
 private:
 	Ui::MainWindow *_ui;
 	QCPBars *_str1_histo, *_str2_histo, *_str3_histo;
-	sim_core_monte_carlo *_sim;
+	sim_core_parking *_sim;
 	std::thread _thr;
 
 	int _skip_replications;

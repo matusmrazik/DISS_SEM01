@@ -1,9 +1,9 @@
-#ifndef SIM_CORE_BASE_HPP
-#define SIM_CORE_BASE_HPP
+#ifndef SIM_CORE_MC_BASE_HPP
+#define SIM_CORE_MC_BASE_HPP
 
 #include <cinttypes>
 
-class sim_core_base
+class sim_core_mc_base
 {
 public:
 	enum class state
@@ -14,8 +14,8 @@ public:
 		FINISHED
 	};
 
-	sim_core_base();
-	virtual ~sim_core_base();
+	sim_core_mc_base();
+	virtual ~sim_core_mc_base();
 
 	virtual void simulate(uint32_t replications);
 	virtual void exec_replication(uint32_t replication) = 0;
@@ -36,4 +36,4 @@ protected:
 	state _state;
 };
 
-#endif // SIM_CORE_BASE_HPP
+#endif // SIM_CORE_MC_BASE_HPP
