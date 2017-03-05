@@ -6,20 +6,41 @@
 #include <algorithm>
 #include <cstdio>
 
-sim_core_monte_carlo::sim_core_monte_carlo(uint32_t parking_places, seed_t seed)
-	: sim_core_base(),
-	  _places(parking_places),
-	  _gen_seed(seed), _gen_k(_gen_seed()), _gen_parking(_gen_seed()),
-	  _dist_k(1, parking_places), _dist_parking(0.0, 1.0)
+sim_core_monte_carlo::sim_core_monte_carlo()
+	: _places(15), _seed(0), _gen_seed(), _gen_k(), _gen_parking(),
+	  _dist_k(1, _places), _dist_parking(0.0, 1.0),
+	  _strategy_1_total(0), _strategy_2_total(0), _strategy_3_total(0),
+	  _send_signal_at(0)
 {
-	LOG_INFO("Seed = %u", seed);
 }
 
 sim_core_monte_carlo::~sim_core_monte_carlo()
 {
 }
 
-void sim_core_monte_carlo::exec_replication(uint32_t replication)
+void sim_core_monte_carlo::init(uint32_t parking_places, seed_t seed)
+{
+	_seed = seed;
+	LOG_INFO("Seed = %u", _seed);
+	_places = parking_places;
+	_gen_seed.seed(_seed);
+	_gen_k.seed(_gen_seed());
+	_gen_parking.seed(_gen_seed());
+	_dist_k = std::uniform_int_distribution<>(1, _places);
+	_dist_parking = std::uniform_real_distribution<>(0.0, 1.0);
+}
+
+void sim_core_monte_carlo::send_signal_at_replication(uint32_t replication)
+{
+	_send_signal_at = replication;
+}
+
+sim_core_monte_carlo::seed_t sim_core_monte_carlo::get_seed() const
+{
+	return _seed;
+}
+
+void sim_core_monte_carlo::exec_replication(uint32_t)
 {
 	uint32_t k = _dist_k(_gen_k);
 	std::vector<bool> free_places(_places, true);
@@ -37,19 +58,14 @@ void sim_core_monte_carlo::exec_replication(uint32_t replication)
 		hlp.erase(it);
 	}
 
-	uint32_t cnt = std::count(free_places.begin(), free_places.end(), false);
-	if (k != cnt)
-	{
-		fprintf(stderr, "Error in replication %u, not correctly generated parking places! Generated = %u vs. k = %u\n", replication, cnt, k);
-		std::terminate();
-	}
-
 	if (k == _places)
 	{
 		_strategy_1_total += 2 * _places;
+		++_strategy_1_data.back();
 		_strategy_2_total += 2 * _places;
+		++_strategy_2_data.back();
 		_strategy_3_total += 2 * _places;
-		_optimal_total += 2 * _places;
+		++_strategy_3_data.back();
 		return;
 	}
 
@@ -59,6 +75,7 @@ void sim_core_monte_carlo::exec_replication(uint32_t replication)
 		if (free_places[i])
 		{
 			_strategy_1_total += i + 1; // 1-based
+			++_strategy_1_data[i + 1];
 			break;
 		}
 	}
@@ -74,6 +91,10 @@ void sim_core_monte_carlo::exec_replication(uint32_t replication)
 		}
 	}
 	_strategy_2_total += free_pos;
+	if (free_pos == static_cast<int>(2 * _places))
+		++_strategy_2_data.back();
+	else
+		++_strategy_2_data[free_pos];
 
 	// 3rd strategy - count cars and go until there's big probability of two free places left
 	int count = 0, checked = 0;
@@ -97,15 +118,21 @@ void sim_core_monte_carlo::exec_replication(uint32_t replication)
 		}
 	}
 	_strategy_3_total += free_pos;
+	if (free_pos == static_cast<int>(2 * _places))
+		++_strategy_3_data.back();
+	else
+		++_strategy_3_data[free_pos];
+}
 
-	// optimal
-	for (uint32_t i = 0; i < _places; ++i)
+void sim_core_monte_carlo::after_replication(uint32_t replication)
+{
+	sim_core_base::after_replication(replication);
+	double result1 = (double)_strategy_1_total / replication;
+	double result2 = (double)_strategy_2_total / replication;
+	double result3 = (double)_strategy_3_total / replication;
+	if (replication % _send_signal_at == 0)
 	{
-		if (free_places[i])
-		{
-			_optimal_total += i + 1; // 1-based
-			break;
-		}
+		emit replication_finished(replication, result1, result2, result3);
 	}
 }
 
@@ -115,17 +142,40 @@ void sim_core_monte_carlo::before_simulation()
 	_strategy_1_total = 0;
 	_strategy_2_total = 0;
 	_strategy_3_total = 0;
-	_optimal_total = 0;
+	_strategy_1_data = QVector<double>(_places + 2, 0);
+	_strategy_2_data = QVector<double>(_places + 2, 0);
+	_strategy_3_data = QVector<double>(_places + 2, 0);
 }
 
 void sim_core_monte_carlo::after_simulation()
 {
 	sim_core_base::after_simulation();
-	printf("\nN = %u\n", _places);
-	printf("replications = %u\n", _repl);
-	printf("\nResult:\n");
-	printf("Strategy 1: %.6f\n", (double)_strategy_1_total / _repl);
-	printf("Strategy 2: %.6f\n", (double)_strategy_2_total / _repl);
-	printf("Strategy 3 (custom): %.6f\n", (double)_strategy_3_total / _repl);
-	printf("Optimal: %.6f\n", (double)_optimal_total / _repl);
+	LOG_INFO("N = %u", _places);
+	LOG_INFO("replications = %u", _repl);
+	LOG_INFO("Result:");
+	LOG_INFO("Strategy 1: %.6f", (double)_strategy_1_total / _repl);
+	LOG_INFO("Strategy 2: %.6f", (double)_strategy_2_total / _repl);
+	LOG_INFO("Strategy 3 (custom): %.6f", (double)_strategy_3_total / _repl);
+	emit simulation_finished();
+}
+
+void sim_core_monte_carlo::stopped_action()
+{
+	sim_core_base::stopped_action();
+	emit simulation_finished();
+}
+
+QVector<double> sim_core_monte_carlo::get_strategy_1_data() const
+{
+	return _strategy_1_data;
+}
+
+QVector<double> sim_core_monte_carlo::get_strategy_2_data() const
+{
+	return _strategy_2_data;
+}
+
+QVector<double> sim_core_monte_carlo::get_strategy_3_data() const
+{
+	return _strategy_3_data;
 }
