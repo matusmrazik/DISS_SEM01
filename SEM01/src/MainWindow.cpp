@@ -30,6 +30,8 @@
 	histo_ptr->clearGraphs(); \
 	histo_ptr->plotLayout()->insertRow(0); \
 	histo_ptr->plotLayout()->addElement(0, 0, new QCPPlotTitle(histo_ptr, name)); \
+	histo_ptr->xAxis->setLabel("Úspešnosť zaparkovania"); \
+	histo_ptr->yAxis->setLabel("Početnosť"); \
 	qcpbars_ptr = new QCPBars(histo_ptr->xAxis, histo_ptr->yAxis); \
 	qcpbars_ptr->setName(name); \
 	qcpbars_ptr->setBrush(QBrush(color))

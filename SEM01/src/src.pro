@@ -30,7 +30,8 @@ CONFIG(release, debug|release) {
 
 INCLUDEPATH += ../include/
 
-LIBS += -lqcustomplot
+win32: LIBS += -lqcustomplot1
+unix: LIBS += -lqcustomplot
 
 SOURCES += \
 	main.cpp\
