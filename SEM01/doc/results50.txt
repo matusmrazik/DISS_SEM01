@@ -1,0 +1,337 @@
+
+N = 3
+replications = 10000000
+Result:
+Strategy 1: 3.554937
+Strategy 2: 4.333023
+Strategy 3 (custom): 3.554937
+
+N = 4
+replications = 10000000
+Result:
+Strategy 1: 4.395392
+Strategy 2: 5.373931
+Strategy 3 (custom): 4.145520
+
+N = 5
+replications = 10000000
+Result:
+Strategy 1: 5.258558
+Strategy 2: 6.398947
+Strategy 3 (custom): 4.698784
+
+N = 6
+replications = 10000000
+Result:
+Strategy 1: 6.140769
+Strategy 2: 5.692079
+Strategy 3 (custom): 5.274173
+
+N = 7
+replications = 10000000
+Result:
+Strategy 1: 7.035467
+Strategy 2: 6.377876
+Strategy 3 (custom): 5.509569
+
+N = 8
+replications = 10000000
+Result:
+Strategy 1: 7.941225
+Strategy 2: 7.060845
+Strategy 3 (custom): 5.916706
+
+N = 9
+replications = 10000000
+Result:
+Strategy 1: 8.855529
+Strategy 2: 6.796929
+Strategy 3 (custom): 6.349514
+
+N = 10
+replications = 10000000
+Result:
+Strategy 1: 9.777295
+Strategy 2: 7.307168
+Strategy 3 (custom): 6.504736
+
+N = 11
+replications = 10000000
+Result:
+Strategy 1: 10.705249
+Strategy 2: 7.818081
+Strategy 3 (custom): 6.828262
+
+N = 12
+replications = 10000000
+Result:
+Strategy 1: 11.638565
+Strategy 2: 7.808526
+Strategy 3 (custom): 7.169922
+
+N = 13
+replications = 10000000
+Result:
+Strategy 1: 12.575436
+Strategy 2: 8.218921
+Strategy 3 (custom): 7.301318
+
+N = 14
+replications = 10000000
+Result:
+Strategy 1: 13.517444
+Strategy 2: 8.626689
+Strategy 3 (custom): 7.577408
+
+N = 15
+replications = 10000000
+Result:
+Strategy 1: 14.461244
+Strategy 2: 8.783956
+Strategy 3 (custom): 7.861516
+
+N = 16
+replications = 10000000
+Result:
+Strategy 1: 15.409395
+Strategy 2: 9.127222
+Strategy 3 (custom): 7.982492
+
+N = 17
+replications = 10000000
+Result:
+Strategy 1: 16.359766
+Strategy 2: 9.462104
+Strategy 3 (custom): 8.245341
+
+N = 18
+replications = 10000000
+Result:
+Strategy 1: 17.310686
+Strategy 2: 9.750033
+Strategy 3 (custom): 8.464032
+
+N = 19
+replications = 10000000
+Result:
+Strategy 1: 18.266580
+Strategy 2: 10.036036
+Strategy 3 (custom): 8.603179
+
+N = 20
+replications = 10000000
+Result:
+Strategy 1: 19.223710
+Strategy 2: 10.325472
+Strategy 3 (custom): 8.797874
+
+N = 21
+replications = 10000000
+Result:
+Strategy 1: 20.183271
+Strategy 2: 10.696314
+Strategy 3 (custom): 9.034596
+
+N = 22
+replications = 10000000
+Result:
+Strategy 1: 21.143055
+Strategy 2: 10.952633
+Strategy 3 (custom): 9.161469
+
+N = 23
+replications = 10000000
+Result:
+Strategy 1: 22.104708
+Strategy 2: 11.208342
+Strategy 3 (custom): 9.367473
+
+N = 24
+replications = 10000000
+Result:
+Strategy 1: 23.066792
+Strategy 2: 11.650229
+Strategy 3 (custom): 9.551348
+
+N = 25
+replications = 10000000
+Result:
+Strategy 1: 24.032442
+Strategy 2: 11.878457
+Strategy 3 (custom): 9.664846
+
+N = 26
+replications = 10000000
+Result:
+Strategy 1: 24.998598
+Strategy 2: 12.096288
+Strategy 3 (custom): 9.873582
+
+N = 27
+replications = 10000000
+Result:
+Strategy 1: 25.966536
+Strategy 2: 12.596955
+Strategy 3 (custom): 10.081205
+
+N = 28
+replications = 10000000
+Result:
+Strategy 1: 26.934769
+Strategy 2: 12.803478
+Strategy 3 (custom): 10.142121
+
+N = 29
+replications = 10000000
+Result:
+Strategy 1: 27.904327
+Strategy 2: 13.005848
+Strategy 3 (custom): 10.393042
+
+N = 30
+replications = 10000000
+Result:
+Strategy 1: 28.874956
+Strategy 2: 13.553219
+Strategy 3 (custom): 10.501192
+
+N = 31
+replications = 10000000
+Result:
+Strategy 1: 29.845132
+Strategy 2: 13.727056
+Strategy 3 (custom): 10.684986
+
+N = 32
+replications = 10000000
+Result:
+Strategy 1: 30.817665
+Strategy 2: 13.921148
+Strategy 3 (custom): 10.842847
+
+N = 33
+replications = 10000000
+Result:
+Strategy 1: 31.790140
+Strategy 2: 14.499505
+Strategy 3 (custom): 10.981784
+
+N = 34
+replications = 10000000
+Result:
+Strategy 1: 32.764535
+Strategy 2: 14.669679
+Strategy 3 (custom): 11.132075
+
+N = 35
+replications = 10000000
+Result:
+Strategy 1: 33.737769
+Strategy 2: 14.834604
+Strategy 3 (custom): 11.258330
+
+N = 36
+replications = 10000000
+Result:
+Strategy 1: 34.713501
+Strategy 2: 15.449617
+Strategy 3 (custom): 11.391612
+
+N = 37
+replications = 10000000
+Result:
+Strategy 1: 35.688695
+Strategy 2: 15.607257
+Strategy 3 (custom): 11.600021
+
+N = 38
+replications = 10000000
+Result:
+Strategy 1: 36.663466
+Strategy 2: 15.762501
+Strategy 3 (custom): 11.741899
+
+N = 39
+replications = 10000000
+Result:
+Strategy 1: 37.640260
+Strategy 2: 16.403332
+Strategy 3 (custom): 11.884125
+
+N = 40
+replications = 10000000
+Result:
+Strategy 1: 38.615309
+Strategy 2: 16.552344
+Strategy 3 (custom): 11.942622
+
+N = 41
+replications = 10000000
+Result:
+Strategy 1:
+ 39.595156
+Strategy 2: 16.699626
+Strategy 3 (custom): 12.186373
+
+N = 42
+replications = 10000000
+Result:
+Strategy 1: 40.573024
+Strategy 2: 17.359944
+Strategy 3 (custom): 12.273304
+
+N = 43
+replications = 10000000
+Result:
+Strategy 1: 41.551230
+Strategy 2: 17.487982
+Strategy 3 (custom): 12.431335
+
+N = 44
+replications = 10000000
+Result:
+Strategy 1: 42.531360
+Strategy 2: 17.631559
+Strategy 3 (custom): 12.585332
+
+N = 45
+replications = 10000000
+Result:
+Strategy 1: 43.509176
+Strategy 2: 18.308794
+Strategy 3 (custom): 12.687297
+
+N = 46
+replications = 10000000
+Result:
+Strategy 1: 44.488347
+Strategy 2: 18.436178
+Strategy 3 (custom): 12.812012
+
+N = 47
+replications = 10000000
+Result:
+Strategy 1: 45.469904
+Strategy 2: 18.569642
+Strategy 3 (custom): 13.065659
+
+N = 48
+replications = 10000000
+Result:
+Strategy 1: 46.450054
+Strategy 2: 19.280478
+Strategy 3 (custom): 13.092372
+
+N = 49
+replications = 10000000
+Result:
+Strategy 1: 47.434170
+Strategy 2: 19.391666
+Strategy 3 (custom): 13.267936
+
+N = 50
+replications = 10000000
+Result:
+Strategy 1: 48.411865
+Strategy 2: 19.507664
+Strategy 3 (custom): 13.355226
